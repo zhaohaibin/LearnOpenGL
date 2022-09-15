@@ -1,0 +1,5 @@
+*.sln
+*.opendb
+*.db
+/x64
+/Framebuffers/x64
