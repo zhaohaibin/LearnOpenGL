@@ -3,3 +3,4 @@
 *.db
 /x64
 /Framebuffers/x64
+/.vs
