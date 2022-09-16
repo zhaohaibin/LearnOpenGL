@@ -1,6 +1,5 @@
 #include "texture_loader.h"
 #include <stb/stb_image.h>
-
 #include <glad/glad.h>
 
 unsigned int gl::load_texture_2d(const string& file)

@@ -18,5 +18,6 @@ protected:
 
 private:
 	gl::shader* m_shader;
+	unsigned int m_texture_id;
 };
 #endif //_RECTANGLE_NODE_H
