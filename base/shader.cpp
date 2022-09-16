@@ -80,6 +80,11 @@ namespace gl
 		glUseProgram(m_id);
 	}
 
+	void shader::un_use()
+	{
+		glUseProgram(0);
+	}
+
 	void shader::set_int(const string& name, int value)
 	{
 		glUniform1i(glGetUniformLocation(m_id, name.c_str()), value);

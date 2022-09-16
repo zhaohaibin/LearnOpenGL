@@ -16,6 +16,7 @@ namespace gl
 
 		bool initialize(string& error);
 		void use();
+		void un_use();
 		void set_int(const string& name, int value);
 		void set_float(const string& name, float value);
 		void set_matrix4(const string& name, const glm::mat4& mat4);
