@@ -18,35 +18,7 @@ cube::~cube()
 
 }
 
-void cube::drawing()
-{
-	if (m_init)
-	{
-		m_init = false;
-		init();
-	}
-
-	glBindVertexArray(m_vao);
-
-	m_shader->use();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-
-	glm::mat4 view(1.0f);
-	view = system_env::instance()->get_camera()->get_view_matrix();
-	m_shader->set_matrix4("view", view);
-
-	glm::mat4 projection = get_projection_matrix4();
-	m_shader->set_matrix4("projection", projection);
-
-	m_shader->set_matrix4("model", m_model);
-	
-	glDrawElements(GL_TRIANGLES, 32*sizeof(unsigned int), GL_UNSIGNED_INT, 0);
-
-	glBindVertexArray(0);
-}
-
-void cube::init()
+bool cube::initialize()
 {
 	//顶点数组对象
 	glGenVertexArrays(1, &m_vao);
@@ -58,11 +30,12 @@ void cube::init()
 	unsigned int vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), data, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	delete[]data;
 
 	//构建ebo
 	glGenBuffers(1, &m_ebo);
@@ -81,9 +54,7 @@ void cube::init()
 		20, 21, 22,
 		20, 22, 23
 	};
-	m_indices = new unsigned int[32];
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), m_indices, GL_STATIC_DRAW);
-	memcpy(m_indices, indices, sizeof(indices));
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	m_texture = gl::load_texture_2d("./texture/container.jpg");
 
@@ -95,6 +66,35 @@ void cube::init()
 		m_shader->use();
 		m_shader->set_int("texture1", 0);
 	}
+	return true;
+}
+
+void cube::drawing()
+{
+
+	glBindVertexArray(m_vao);
+
+	m_shader->use();
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	glm::mat4 view(1.0f);
+	view = system_env::instance()->get_camera()->get_view_matrix();
+	m_shader->set_matrix4("view", view);
+
+	glm::mat4 projection = get_projection_matrix4();
+	m_shader->set_matrix4("projection", projection);
+
+	m_shader->set_matrix4("model", m_model);
+	
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+	glBindVertexArray(0);
+}
+
+void cube::init()
+{
+	
 }
 
 int cube::gen_buffer_data(float* data)
@@ -171,52 +171,7 @@ int cube::gen_buffer_data(float* data)
 		px7, py7, pz7, 0.0, 0.0,
 		px8, py8, pz8, 1.0, 0.0,
 	};
-
-	float cubeVertices[] = {
-		// positions          // texture Coords
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-
-		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f
-	};
-	memcpy(data, cubeVertices, sizeof(cubeVertices));
-	return 5 * 4 * 6;
+	memcpy(data, vertices, sizeof(vertices));
+	return 5 * 4 * 6 * sizeof(float);
 }
 

@@ -5,7 +5,10 @@
 #include "system_env.h"
 #include "../base/texture_loader.h"
 
-rectangle_node::rectangle_node()
+rectangle_node::rectangle_node(float width, float height, const glm::mat4& model_mat4)
+	: m_width(width)
+	, m_height(height)
+	, m_model_mat4(model_mat4)
 {
 
 }
@@ -27,16 +30,11 @@ bool rectangle_node::initialize()
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
 
-	float vertices[] = { 0.5f, 0.5f, 0.0f,//срио╫г
-		0.5f, -0.5f, 0.0f,//сроб╫г
-		-0.5f, -0.5f, 0.0f,//вСоб╫г
-		-0.5f, 0.5f, 0.0f //вСио╫г
-	};
-
+	unsigned int size = build_vertices();
 	unsigned int vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size, m_vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
@@ -62,6 +60,7 @@ bool rectangle_node::initialize()
 	m_shader->use();
 	m_texture_id = gl::load_texture_2d("./texture/container.jpg");
 	m_shader->set_int("texture_1", 0);
+	m_shader->set_matrix4("model", m_model_mat4);
 	m_shader->un_use();
 	return true;
 }
@@ -83,5 +82,19 @@ void rectangle_node::drawing()
 
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+unsigned int rectangle_node::build_vertices()
+{
+	float vertices[] = { m_width / 2.0f, m_height / 2.0f, 0.0f,//срио╫г
+		m_width / 2.0f, -m_height / 2.0f, 0.0f,//сроб╫г
+		-m_width / 2.0f, -m_height / 2.0f, 0.0f,//вСоб╫г
+		-m_width / 2.0f, m_height / 2.0f, 0.0f //вСио╫г
+	};
+
+	unsigned int count = 3 * 4;
+	m_vertices = new float[3 * 4];
+	memcpy(m_vertices, vertices, sizeof(vertices));
+	return count * sizeof(float);
 }
 

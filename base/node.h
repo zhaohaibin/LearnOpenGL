@@ -25,9 +25,9 @@ protected:
 protected:
 	unsigned int m_vao;
 	unsigned int m_ebo;
-private:
-	
+
 	bool m_init;
+private:
 	typedef  std::list<node*> childs;
 
 	childs m_childs;

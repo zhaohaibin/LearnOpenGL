@@ -159,15 +159,29 @@ int main()
 
 	node* root = new node;
 	glm::mat4 model(1.0);
-	//root->add_child(new cube(0.2f, model));
-	root->add_child(new rectangle_node());
+	//沿x方向平移0.5，y方向平移0.5
+	model = glm::translate(model, glm::vec3(0.5f, 0.5f, 0.0f));
+	//root->add_child(new rectangle_node(1.0f, 1.0f, model));
+
+	model = glm::mat4(1.0);
+	//沿X方向移动-0.5，Y方向移动-0.3，Z方向移动1.0
+	model = glm::translate(model, glm::vec3(-0.6f, -0.6f, 1.0f));
+	//沿Y轴旋转45度
+	model = glm::rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	//root->add_child(new rectangle_node(0.6f, 0.6f, model));
+
+	//root->add_child(new cube(0.3f, model));
+
+	framebuffer_node* fn =  new framebuffer_node();
+	fn->add_child(new rectangle_node(0.6f, 0.6f, model));
+	root->add_child(fn);
 	setup_scene(root);
+	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
 		float currentFrame = (float)glfwGetTime();
 		_deltaTime = currentFrame - _lastTime;
 		_lastTime = currentFrame;

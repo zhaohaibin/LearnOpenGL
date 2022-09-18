@@ -33,6 +33,8 @@ public:
 
 public:
 	void use();
+
+	unsigned int get_texture();
 private:
 
 	void gen_framebuffer();

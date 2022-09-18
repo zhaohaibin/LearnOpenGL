@@ -12,6 +12,7 @@ public:
 	~cube();
 
 public:
+	virtual bool initialize() override;
 	virtual void drawing() override;
 
 private:

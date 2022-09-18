@@ -7,6 +7,11 @@
 	framebuffer_node 下的子节点将全部渲染到自定义的帧缓冲中，
 	然后将该帧缓冲中的纹理附件作为framebuffer_node的纹理渲染到屏幕上
 */
+
+namespace gl
+{
+	class shader;
+}
 class framebuffer_node : public node
 {
 public:
@@ -19,8 +24,9 @@ public:
 protected:
 	bool initialize() override;
 private:
-	bool m_init;
+	gl::shader* m_shader;
 	framebuffer m_framebuffer;
+	unsigned int m_texture_id;
 };
 
 #endif //_FRAMEBUFFER_NODE_H
