@@ -10,7 +10,7 @@ framebuffer::framebuffer()
 
 framebuffer::~framebuffer()
 {
-
+	glDeleteFramebuffers(1, &m_fbo);
 }
 
 void framebuffer::use()
