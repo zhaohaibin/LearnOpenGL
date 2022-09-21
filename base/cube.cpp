@@ -4,8 +4,9 @@
 #include "../base/system_env.h"
 #include "../base/camera.h"
 
-cube::cube(float width, const glm::mat4& model)
+cube::cube(float width, const string& texture_image, const glm::mat4& model)
 	: m_width(width)
+	, m_texture_image(texture_image)
 	, m_model(model)
 	, m_init(true)
 	, m_shader(nullptr)
@@ -56,7 +57,7 @@ bool cube::initialize()
 	};
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	m_texture = gl::load_texture_2d("./texture/container.jpg");
+	m_texture = gl::load_texture_2d(m_texture_image);
 
 	if (m_shader == nullptr)
 	{

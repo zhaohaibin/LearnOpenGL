@@ -8,7 +8,7 @@
 class cube : public node
 {
 public:
-	cube(float width, const glm::mat4& model);
+	cube(float width, const string& texture_image, const glm::mat4& model);
 	~cube();
 
 public:
@@ -20,6 +20,7 @@ private:
 	 int gen_buffer_data(float* data);
 private:
 	float m_width;
+	string m_texture_image;
 	glm::mat4 m_model;
 	bool m_init;
 	unsigned int* m_indices;
