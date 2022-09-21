@@ -2,6 +2,7 @@
 #define  _FRAMEBUFFER_NODE_H
 #include "../base/node.h"
 #include "../base/framebuffer.h"
+#include "../base/system_env.h"
 
 /*
 	framebuffer_node 下的子节点将全部渲染到自定义的帧缓冲中，
@@ -25,8 +26,9 @@ protected:
 	bool initialize() override;
 private:
 	gl::shader* m_shader;
-	framebuffer m_framebuffer;
+	framebuffer* m_framebuffer;
 	unsigned int m_texture_id;
+	view_port m_vp;
 };
 
 #endif //_FRAMEBUFFER_NODE_H

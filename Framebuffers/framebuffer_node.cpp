@@ -7,6 +7,8 @@
 framebuffer_node::framebuffer_node()
 	: m_shader(nullptr)
 {
+	m_vp = system_env::instance()->get_view_port();
+	m_framebuffer = new framebuffer;
 }
 
 
@@ -21,8 +23,16 @@ void framebuffer_node::render()
 		m_init = false;
 		initialize();
 	}
-
-	m_framebuffer.use();
+	view_port c_view_port = system_env::instance()->get_view_port();
+	if (m_vp.m_width != c_view_port.m_width || m_vp.m_height != c_view_port.m_height)
+	{
+		m_vp = c_view_port;
+		framebuffer* old = m_framebuffer;
+		m_framebuffer = new framebuffer;
+		m_texture_id = m_framebuffer->get_texture();
+		delete old;
+	}
+	m_framebuffer->use();
 	do_render_childs();
 
 	//°ó¶¨µ½Ä¬ÈÏÖ¡»º³å
@@ -81,7 +91,7 @@ bool framebuffer_node::initialize()
 	glEnableVertexAttribArray(1);
 
 	//m_texture_id = gl::load_texture_2d("./texture/container.jpg");
-	m_texture_id = m_framebuffer.get_texture();
+	m_texture_id = m_framebuffer->get_texture();
 	m_shader->use();
 	m_shader->set_int("texture_1", 0);
 	m_shader->un_use();
