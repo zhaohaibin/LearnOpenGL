@@ -113,6 +113,12 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 		}
 		return;
 	}
+
+	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)
+	{
+		//鼠标中键被按下
+		return;
+	}
 	_mouse_button_right_press = false;
 
 	_first_mouse = false;
@@ -168,12 +174,13 @@ int main()
 	model = glm::translate(model, glm::vec3(-0.6f, -0.6f, 1.0f));
 	//沿Y轴旋转45度
 	model = glm::rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	//root->add_child(new rectangle_node(0.6f, 0.6f, model));
+	//root->add_child(new rectangle_node(0.6f, 0.6f, glm::mat4(1.0)));
 
-	//root->add_child(new cube(0.3f, model));
+	root->add_child(new cube(0.3f, "./texture/container.jpg", model));
 
 	framebuffer_node* fn =  new framebuffer_node();
 	fn->add_child(new rectangle_node(0.6f, 0.6f, model));
+	fn->add_child(new cube(0.3f, "./texture/container.png", model));
 	root->add_child(fn);
 	setup_scene(root);
 	glEnable(GL_DEPTH_TEST);
