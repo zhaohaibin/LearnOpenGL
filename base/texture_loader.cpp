@@ -10,7 +10,7 @@ unsigned int gl::load_texture_2d(const string& file)
 	unsigned char* data = stbi_load(file.c_str(), &width, &height, &nrComponents, 0);
 	if (data)
 	{
-		GLenum format;
+		GLenum format = GL_RGB;
 		if (nrComponents == 1)
 			format = GL_RED;
 		if (nrComponents == 3)
