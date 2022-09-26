@@ -21,7 +21,6 @@ private:
 private:
 	float m_width;
 	string m_texture_image;
-	glm::mat4 m_model;
 	bool m_init;
 	unsigned int* m_indices;
 	unsigned int m_texture;

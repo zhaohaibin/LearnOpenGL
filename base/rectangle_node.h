@@ -1,5 +1,6 @@
 #ifndef _RECTANGLE_NODE_H
 #define _RECTANGLE_NODE_H
+#include <string>
 #include "node.h"
 
 namespace gl
@@ -9,7 +10,7 @@ namespace gl
 class rectangle_node : public node
 {
 public:
-	rectangle_node(float width, float height, const glm::mat4& model_mat4);
+	rectangle_node(float width, float height, const std::string& texture, const glm::mat4& model_mat4);
 	~rectangle_node();
 
 protected:
@@ -24,6 +25,7 @@ private:
 
 	float m_width;
 	float m_height;
+	std::string m_texture_file;
 	glm::mat4 m_model_mat4;
 
 	float* m_vertices;

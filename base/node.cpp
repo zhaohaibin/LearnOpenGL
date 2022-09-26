@@ -3,9 +3,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/ext.hpp>
+#include "shader.h"
 
-node::node()
+node::node(glm::mat4 model_matrix/* = glm::mat4(1.0f)*/)
 	: m_init(true)
+	, m_model_matrix_need_update(true)
+	, m_model_matrix(model_matrix)
+	, m_before_rendering_update_callback(nullptr)
+	, m_id(0)
 {
 
 }
@@ -25,6 +30,20 @@ void node::remove_child(node* p)
 	m_childs.remove(p);
 }
 
+void node::set_before_rendering_update_callback(node_before_rendering_update_callback* p)
+{
+	m_before_rendering_update_callback = p;
+}
+
+void node::set_id(unsigned int id)
+{
+	m_id = id;
+}
+
+unsigned int node::get_id()
+{
+	return m_id;
+}
 
 bool node::initialize()
 {
@@ -45,8 +64,22 @@ void node::render()
 		m_init = false;
 		initialize();
 	}
+	if (m_before_rendering_update_callback != nullptr)
+		m_before_rendering_update_callback->do_update(this);
 
+	do_set_matrix();
 	drawing();
+}
+
+void node::set_model_matrix(glm::mat4 matrix)
+{
+	m_model_matrix = matrix;
+	m_model_matrix_need_update = true;
+}
+
+glm::mat4 node::get_model_matrix()
+{
+	return m_model_matrix;
 }
 
 glm::mat4 node::get_projection_matrix4()
@@ -61,6 +94,19 @@ void node::do_render_childs()
 	for (; it != m_childs.end(); ++it)
 	{
 		(*it)->render();
+	}
+}
+
+void node::do_set_matrix()
+{
+	if (m_shader == nullptr)
+		return;
+
+	m_shader->use();
+	if (m_model_matrix_need_update)
+	{
+		m_model_matrix_need_update = false;
+		m_shader->set_matrix4("model", m_model_matrix);
 	}
 }
 

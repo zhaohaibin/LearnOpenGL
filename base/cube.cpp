@@ -5,9 +5,9 @@
 #include "../base/camera.h"
 
 cube::cube(float width, const string& texture_image, const glm::mat4& model)
-	: m_width(width)
+	: node(model)
+	, m_width(width)
 	, m_texture_image(texture_image)
-	, m_model(model)
 	, m_init(true)
 	, m_shader(nullptr)
 {
@@ -61,7 +61,8 @@ bool cube::initialize()
 
 	if (m_shader == nullptr)
 	{
-		m_shader = new gl::shader("./shader/cube/shader.vs", "./shader/cube/shader.fs");
+		const string path = "D:/Workspace/opengl/WorkSpace/LearnOpenGL/base/";
+		m_shader = new gl::shader(path+"/shader/cube/shader.vs", path+"/shader/cube/shader.fs");
 		string error;
 		m_shader->initialize(error);
 		m_shader->use();
@@ -86,7 +87,7 @@ void cube::drawing()
 	glm::mat4 projection = get_projection_matrix4();
 	m_shader->set_matrix4("projection", projection);
 
-	m_shader->set_matrix4("model", m_model);
+	m_shader->set_matrix4("model", m_model_matrix);
 	
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
