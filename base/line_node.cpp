@@ -1,6 +1,8 @@
 #include "line_node.h"
 #include <glad/glad.h>
 #include "shader.h"
+#include "system_env.h"
+#include "camera.h"
 
 line_node::line_node(const std::vector<point>& points)
 	: m_points(points)
@@ -34,6 +36,15 @@ bool line_node::initialize()
 void line_node::drawing()
 {
 	m_shader->use();
+	glm::mat4 view(1.0f);
+	view = system_env::instance()->get_camera()->get_view_matrix();
+	m_shader->set_matrix4("view", view);
+
+	glm::mat4 projection = get_projection_matrix4();
+	m_shader->set_matrix4("projection", projection);
+
+	m_shader->set_matrix4("model", m_model_matrix);
+
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_LINES, 0, m_points.size());
 	glBindVertexArray(0);
