@@ -1,6 +1,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <ctime>
 #include "../base/system_env.h"
 #include "../base/camera.h"
 #include "../base/node.h"
@@ -154,6 +155,9 @@ int main()
 	root->add_child(new coordinate_systems_node);
 	setup_scene(root);
 	glEnable(GL_DEPTH_TEST);
+
+	int rate = 0;
+	time_t last_time = time(0);
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -168,6 +172,14 @@ int main()
 		root->render();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		++rate;
+		time_t ctime = time(0);
+		if (ctime - last_time >= 1)
+		{
+			std::cout << rate << " frame / s" << endl;
+			last_time = ctime;
+			rate = 0;
+		}
 	}
 	glfwTerminate();
 	return 0;
