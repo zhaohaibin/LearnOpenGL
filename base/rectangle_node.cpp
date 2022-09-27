@@ -71,7 +71,7 @@ void rectangle_node::drawing()
 
 	glm::mat4 view(1.0f);
 	view = system_env::instance()->get_camera()->get_view_matrix();
-	m_shader->set_matrix4("model", m_model_matrix);
+	m_shader->set_matrix4("model", get_merge_model_matrix());
 	m_shader->set_matrix4("view", view);
 
 	glm::mat4 projection = get_projection_matrix4();

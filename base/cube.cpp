@@ -87,7 +87,7 @@ void cube::drawing()
 	glm::mat4 projection = get_projection_matrix4();
 	m_shader->set_matrix4("projection", projection);
 
-	m_shader->set_matrix4("model", m_model_matrix);
+	m_shader->set_matrix4("model", /*m_model_matrix*/get_merge_model_matrix());
 	
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 

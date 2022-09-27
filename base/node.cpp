@@ -23,6 +23,7 @@ node::~node()
 void node::add_child(node* p)
 {
 	m_childs.push_back(p);
+	p->m_parent_node = this;
 }
 
 void node::remove_child(node* p)
@@ -82,6 +83,11 @@ glm::mat4 node::get_model_matrix()
 	return m_model_matrix;
 }
 
+glm::mat4 node::get_merge_model_matrix()
+{
+	return get_ancestors_model()*m_model_matrix;
+}
+
 glm::mat4 node::get_projection_matrix4()
 {
 	view_port& vp = system_env::instance()->get_view_port();
@@ -108,5 +114,12 @@ void node::do_set_matrix()
 		m_model_matrix_need_update = false;
 		m_shader->set_matrix4("model", m_model_matrix);
 	}
+}
+
+glm::mat4 node::get_ancestors_model()
+{
+	if (m_parent_node == nullptr)
+		return glm::mat4(1.0f);
+	return m_parent_node->get_ancestors_model()*m_parent_node->get_model_matrix();
 }
 

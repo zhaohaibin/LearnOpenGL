@@ -35,6 +35,7 @@ public:
 
 	void set_model_matrix(glm::mat4 matrix);
 	glm::mat4 get_model_matrix();
+	glm::mat4 get_merge_model_matrix();
 	glm::mat4 get_projection_matrix4();
 protected:
 	virtual bool initialize();
@@ -44,6 +45,7 @@ protected:
 
 private:
 	void do_set_matrix();
+	glm::mat4 get_ancestors_model();
 protected:
 	unsigned int m_vao;
 	unsigned int m_ebo;
@@ -54,9 +56,10 @@ protected:
 
 	bool m_init;
 private:
-	typedef  std::list<node*> childs;
-
+	node* m_parent_node;
 	unsigned int m_id;
+
+	typedef  std::list<node*> childs;
 	childs m_childs;
 	node_before_rendering_update_callback* m_before_rendering_update_callback;
 

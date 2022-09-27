@@ -43,7 +43,7 @@ void line_node::drawing()
 	glm::mat4 projection = get_projection_matrix4();
 	m_shader->set_matrix4("projection", projection);
 
-	m_shader->set_matrix4("model", m_model_matrix);
+	m_shader->set_matrix4("model", get_merge_model_matrix());
 
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_LINES, 0, m_points.size());
