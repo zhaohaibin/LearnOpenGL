@@ -26,7 +26,6 @@ private:
 	float m_width;
 	float m_height;
 	std::string m_texture_file;
-	glm::mat4 m_model_mat4;
 
 	float* m_vertices;
 };

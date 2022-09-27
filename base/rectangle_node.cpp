@@ -6,10 +6,10 @@
 #include "../base/texture_loader.h"
 
 rectangle_node::rectangle_node(float width, float height, const std::string& texture, const glm::mat4& model_mat4)
-	: m_width(width)
+	: node(model_mat4)
+	, m_width(width)
 	, m_height(height)
 	, m_texture_file(texture)
-	, m_model_mat4(model_mat4)
 {
 
 }
@@ -61,7 +61,6 @@ bool rectangle_node::initialize()
 	m_shader->use();
 	m_texture_id = gl::load_texture_2d(m_texture_file);
 	m_shader->set_int("texture_1", 0);
-	m_shader->set_matrix4("model", m_model_mat4);
 	m_shader->un_use();
 	return true;
 }
@@ -72,6 +71,7 @@ void rectangle_node::drawing()
 
 	glm::mat4 view(1.0f);
 	view = system_env::instance()->get_camera()->get_view_matrix();
+	m_shader->set_matrix4("model", m_model_matrix);
 	m_shader->set_matrix4("view", view);
 
 	glm::mat4 projection = get_projection_matrix4();
