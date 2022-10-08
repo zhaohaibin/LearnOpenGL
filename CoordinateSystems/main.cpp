@@ -122,6 +122,11 @@ void frame_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	_camera->process_mouse_scroll_wheel(yoffset);
+}
+
 int main()
 {
 	glfwInit();
@@ -141,6 +146,7 @@ int main()
 	glfwSetFramebufferSizeCallback(window, frame_size_callback);
 	glfwSetCursorPosCallback(window, mouse_cursor_pos_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
