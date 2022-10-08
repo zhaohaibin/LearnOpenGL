@@ -4,3 +4,8 @@
 /x64
 /Framebuffers/x64
 /.vs
+*.tlog
+*.log
+*.obj
+*.idb
+*.pdb
