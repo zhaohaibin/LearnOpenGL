@@ -36,6 +36,11 @@ glm::vec3 camera::get_front()
 	return m_front;
 }
 
+float camera::get_filed_view()
+{
+	return m_zoom;
+}
+
 void camera::process_keyboard(camera_move_event event, float delta_time)
 {
 	float velocity = m_speed*delta_time;

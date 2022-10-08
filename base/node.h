@@ -40,8 +40,7 @@ public:
 protected:
 	virtual bool initialize();
 	virtual void drawing();
-
-	void do_render_childs();
+	virtual void do_render_childs();
 
 private:
 	void do_set_matrix();

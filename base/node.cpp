@@ -1,9 +1,11 @@
 #include "node.h"
 #include "../base/system_env.h"
+#include "../base/camera.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/ext.hpp>
 #include "shader.h"
+
 
 node::node(glm::mat4 model_matrix/* = glm::mat4(1.0f)*/)
 	: m_init(true)
@@ -91,7 +93,8 @@ glm::mat4 node::get_merge_model_matrix()
 glm::mat4 node::get_projection_matrix4()
 {
 	view_port& vp = system_env::instance()->get_view_port();
-	return glm::perspective(glm::radians(45.0f), (float)vp.m_width / (float)vp.m_height, 0.1f, 100.f);
+	camera* _camera = system_env::instance()->get_camera();
+	return glm::perspective(glm::radians(_camera->get_filed_view()), (float)vp.m_width / (float)vp.m_height, 0.1f, 100.f);
 }
 
 void node::do_render_childs()

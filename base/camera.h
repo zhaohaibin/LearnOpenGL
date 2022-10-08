@@ -41,6 +41,7 @@ public:
 	glm::mat4 get_view_matrix();
 	glm::vec3 get_position();
 	glm::vec3 get_front();
+	float get_filed_view();
 	void process_keyboard(camera_move_event event, float delta_time);
 	void process_mouse_movent(float xoffset, float yoffset, bool constrain_pitch =true);
 	void process_mouse_move(mouse_press_button btn, float xoffset, float yoffset);
