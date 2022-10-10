@@ -90,7 +90,7 @@ void coordinate_node_before_rendering_update_callback::do_update(node* p)
 	{
 		static glm::mat4 last_3 = p->get_model_matrix();
 		glm::mat4 model = p->get_model_matrix();
-		last_3 = glm::rotate(last_3, glm::radians(0.02f), glm::vec3(0.0f, 1.0f, 0.0f));
+		last_3 = glm::rotate(last_3, glm::radians(0.02f), glm::vec3(	1.0f, 1.0f, 0.0f));
 		model = last_3;
 		model = glm::translate(model, glm::vec3(1.0, 0.0, 0.0));
 		p->set_model_matrix(model);
