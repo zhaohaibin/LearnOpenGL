@@ -71,8 +71,8 @@ bool mesh_node::initialize()
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferData(GL_ARRAY_BUFFER, m_mesh->m_vertex_numbers * sizeof(float) * 3, m_mesh->m_bittangent, GL_STATIC_DRAW);
-		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(4);
 	}
 
 	glGenBuffers(1, &m_ebo);
@@ -108,14 +108,22 @@ bool mesh_node::initialize()
 			num = heightNr++;
 		string  name = _texture.m_type + "_" + std::to_string(num);
 		unsigned int id = m_mesh->m_textures[i].m_id;
-		m_shader->set_int(name, id);
+		m_shader->set_int(name, i);
 	}
 	return true;
 }
 
 void mesh_node::drawing()
 {
+	glBindVertexArray(m_vao);
 	m_shader->use();
+	for (int i = 0; i < m_mesh->m_textures.size(); ++i)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, m_mesh->m_textures[i].m_id);
+	}
+
+	
 	glm::mat4 view(1.0f);
 	view = system_env::instance()->get_camera()->get_view_matrix();
 	m_shader->set_matrix4("view", view);
@@ -125,13 +133,9 @@ void mesh_node::drawing()
 
 	m_shader->set_matrix4("model", /*m_model_matrix*/get_merge_model_matrix());
 
-	for (int i = 0; i < m_mesh->m_textures.size(); ++i)
-	{
-		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, m_mesh->m_textures[i].m_id);
-	}
+	
 
-	glBindVertexArray(m_vao);
+	
 	glDrawElements(GL_TRIANGLES, m_mesh->m_index_count, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
