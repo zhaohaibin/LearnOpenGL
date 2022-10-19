@@ -169,6 +169,13 @@ bool geometry_node::setup_shader()
 	if (rt == false) return false;
 
 	m_shader->use();
+	update_uniform_value();
+	m_shader->un_use();
+	return rt;
+}
+
+void geometry_node::update_uniform_value()
+{
 	std::map<string, unsigned int>::iterator uint_value_it = m_shader_uniform_value.m_uint_value.begin();
 	for (; uint_value_it != m_shader_uniform_value.m_uint_value.end(); ++uint_value_it)
 	{
@@ -186,13 +193,12 @@ bool geometry_node::setup_shader()
 	{
 		m_shader->set_vec3f(vec3_float_value_it->first, vec3_float_value_it->second);
 	}
-	m_shader->un_use();
-	return rt;
 }
 
 void geometry_node::use_shader()
 {
 	m_shader->use();
+	update_uniform_value();
 	update_mvp();
 	//¼¤»îÎÆÀí
 }

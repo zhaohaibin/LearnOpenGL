@@ -2,10 +2,30 @@
 #include "../base/cube.h"
 
 #include "../base/geometry_node.h"
+#include "../base/system_env.h"
+#include "../base/camera.h"
 
+
+class geometry_node_before_rendering_update_callback : public node_before_rendering_update_callback
+{
+public:
+	geometry_node_before_rendering_update_callback() {}
+	~geometry_node_before_rendering_update_callback() {}
+protected:
+	virtual void do_update(node* p)
+	{
+		glm::vec3 pos = system_env::instance()->get_camera()->get_position();
+		geometry_node* geo_node = dynamic_cast<geometry_node*>(p);
+		if (geo_node != nullptr)
+		{
+			geo_node->set_shader_value("view_pos", pos);
+		}
+	}
+};
 basic_lighting_node::basic_lighting_node()
 {
 	geometry_node* geo_node = new geometry_node;
+	geo_node->set_before_rendering_update_callback(new geometry_node_before_rendering_update_callback());
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,
 		0.5f, -0.5f, -0.5f,

@@ -36,6 +36,7 @@ private:
 	bool setup_vertex_color_array();
 	bool setup_vertex_normal_array();
 	bool setup_shader();
+	void update_uniform_value();
 	void use_shader();
 	void update_mvp();
 private:
