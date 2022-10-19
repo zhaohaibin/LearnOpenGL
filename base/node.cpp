@@ -97,6 +97,16 @@ glm::mat4 node::get_projection_matrix4()
 	return glm::perspective(glm::radians(_camera->get_filed_view()), (float)vp.m_width / (float)vp.m_height, 0.1f, 100.f);
 }
 
+void node::set_vertex_shader_file(const std::string& file)
+{
+	m_vertex_shader_file = file;
+}
+
+void node::set_frag_shader_file(const std::string& file)
+{
+	m_frag_shader_file = file;
+}
+
 void node::do_render_childs()
 {
 	childs::iterator it = m_childs.begin();

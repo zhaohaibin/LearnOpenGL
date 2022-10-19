@@ -2,6 +2,7 @@
 #define _NODE_H
 
 #include <list>
+#include <string>
 #include <glm/glm.hpp>
 
 class node;
@@ -37,6 +38,9 @@ public:
 	glm::mat4 get_model_matrix();
 	glm::mat4 get_merge_model_matrix();
 	glm::mat4 get_projection_matrix4();
+
+	void set_vertex_shader_file(const std::string& file);
+	void set_frag_shader_file(const std::string& file);
 protected:
 	virtual bool initialize();
 	virtual void drawing();
@@ -49,7 +53,8 @@ protected:
 	unsigned int m_vao;
 	unsigned int m_ebo;
 	gl::shader* m_shader;
-
+	std::string m_vertex_shader_file;
+	std::string m_frag_shader_file;
 	bool m_model_matrix_need_update;
 	glm::mat4 m_model_matrix;
 

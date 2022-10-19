@@ -1,14 +1,13 @@
-ï»¿
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <ctime>
 #include "../base/system_env.h"
 #include "../base/camera.h"
 #include "../base/node.h"
 #include "../base/cube.h"
 #include "../base/rectangle_node.h"
-#include "../base/assimp_driver.h"
-#include <ctime>
+#include "basic_lighting_node.h"
 
 float _deltaTime = 0.0f;
 float _lastTime = 0.0f;
@@ -105,7 +104,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)
 	{
-		//é¼ æ ‡ä¸­é”®è¢«æŒ‰ä¸‹
+		//Êó±êÖÐ¼ü±»°´ÏÂ
 		return;
 	}
 	_mouse_button_right_press = false;
@@ -158,17 +157,11 @@ int main()
 	}
 	_lastTime = (float)glfwGetTime();
 
-	node* root = new node;
-	driver::assimp_driver reader;
-	//node* _node = reader.read_file("D:/Workspace/opengl/LearnOpenGL/resources/objects/backpack/backpack.obj");
-	node* _node = reader.read_file("D:/Workspace/opengl/LearnOpenGL/resources/objects/Lamp/Lamp.obj");
-	glm::mat4 model(1.0f);
-	//model = glm::translate(model, glm::vec3(1.5, 1.5, -3.0));
-	_node->set_model_matrix(model);
-	root->add_child(_node);
-
+	node* root = new node();
+	root->add_child(new basic_lighting_node());
 	setup_scene(root);
 	glEnable(GL_DEPTH_TEST);
+
 	int rate = 0;
 	time_t last_time = time(0);
 	while (!glfwWindowShouldClose(window))

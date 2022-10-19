@@ -5,6 +5,7 @@
 #include "node.h"
 #include "mesh_node.h"
 #include "texture_loader.h"
+#include "assimp/material.h"
 
 namespace driver
 {
@@ -124,6 +125,10 @@ namespace driver
 		do_get_texture(_mesh->m_textures, material, aiTextureType_HEIGHT, "texture_normal");
 		// 4. height maps
 		do_get_texture(_mesh->m_textures, material, aiTextureType_AMBIENT, "texture_height");
+
+		/*const aiMaterialProperty *const prop = material->mProperties[0];
+		aiString s;
+		aiGetMaterialString(material, prop->mKey.data, prop->mSemantic, prop->mIndex, &s);*/
 		return new mesh_node(_mesh);
 	}
 
