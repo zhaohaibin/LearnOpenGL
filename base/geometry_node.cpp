@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include "system_env.h"
 #include "camera.h"
+#include "texture_loader.h"
 
 geometry_node::geometry_node(glm::mat4 model_matrix /*= glm::mat4(1.0f)*/) : node(model_matrix)
 , m_vertex_data(nullptr)
@@ -29,6 +30,7 @@ bool geometry_node::initialize()
 
 	rt = setup_vertex_color_array();
 	rt = setup_vertex_normal_array();
+	rt = setup_vertex_texture_array();
 	glBindVertexArray(0);
 	return true;
 }
@@ -36,6 +38,7 @@ bool geometry_node::initialize()
 void geometry_node::drawing()
 {
 	use_shader();
+	active_texture();
 	glBindVertexArray(m_vao);
 	glDrawArrays(m_primitive, 0, m_vertex_data_length / (sizeof(float) * 3));
 	glBindVertexArray(0);
@@ -47,22 +50,32 @@ void geometry_node::set_primitive(unsigned int primitive)
 	m_primitive = primitive;
 }
 
-void geometry_node::set_vertex(float* data, unsigned int length)
+void geometry_node::set_vertex(float* data, unsigned int length, unsigned int layout_index)
 {
 	m_vertex_data = data;
 	m_vertex_data_length = length;
+	m_vertex_layout_index = layout_index;
 }
 
-void geometry_node::set_vertex_color(float* data, unsigned int length)
+void geometry_node::set_vertex_color(float* data, unsigned int length, unsigned int layout_index)
 {
 	m_vertex_color_data = data;
 	m_vertex_color_data_length = length;
+	m_vertex_color_layout_index = layout_index;
 }
 
-void geometry_node::set_vertex_normal(float* data, unsigned int length)
+void geometry_node::set_vertex_normal(float* data, unsigned int length, unsigned int layout_index)
 {
 	m_vertex_normal_data = data;
 	m_vertex_normal_data_length = length;
+	m_vertex_normal_layout_index = layout_index;
+}
+
+void geometry_node::set_vertex_texture(float* data, unsigned int length, unsigned int layout_index)
+{
+	m_vertex_texture_coord_data = data;
+	m_vertex_texture_coord_data_lenght = length;
+	m_vertex_texture_coord_layout_index = layout_index;
 }
 
 void geometry_node::set_shader_file(const std::string& vertex_shader_file, const std::string& frag_shader_file)
@@ -119,6 +132,16 @@ void geometry_node::set_shader_value(const std::string& name, const glm::vec4& v
 	}
 }
 
+void geometry_node::add_material(const std::string& name, const std::string file)
+{
+	material _material;
+	_material.m_id = -1;
+	_material.m_name = name;
+	_material.m_file = file;
+
+	m_materials.push_back(_material);
+}
+
 bool geometry_node::setup_vertex_array()
 {
 	if (m_vertex_data == nullptr)
@@ -128,8 +151,8 @@ bool geometry_node::setup_vertex_array()
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, m_vertex_data_length, m_vertex_data, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(m_vertex_layout_index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(m_vertex_layout_index);
 	return true;
 }
 
@@ -142,8 +165,8 @@ bool geometry_node::setup_vertex_color_array()
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, m_vertex_color_data_length, m_vertex_color_data, GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(m_vertex_color_layout_index, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(m_vertex_color_layout_index);
 	return true;
 }
 
@@ -156,8 +179,22 @@ bool geometry_node::setup_vertex_normal_array()
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, m_vertex_normal_data_length, m_vertex_normal_data, GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(m_vertex_normal_layout_index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(m_vertex_normal_layout_index);
+	return true;
+}
+
+bool geometry_node::setup_vertex_texture_array()
+{
+	if (m_vertex_texture_coord_data == nullptr)
+		return false;
+
+	unsigned int vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, m_vertex_texture_coord_data_lenght, m_vertex_normal_data, GL_STATIC_DRAW);
+	glVertexAttribPointer(m_vertex_texture_coord_layout_index, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(m_vertex_texture_coord_layout_index);
 	return true;
 }
 
@@ -170,6 +207,7 @@ bool geometry_node::setup_shader()
 
 	m_shader->use();
 	update_uniform_value();
+	setup_texture();
 	m_shader->un_use();
 	return rt;
 }
@@ -195,6 +233,15 @@ void geometry_node::update_uniform_value()
 	}
 }
 
+void geometry_node::setup_texture()
+{
+	for (int i = 0; i < m_materials.size(); ++i)
+	{
+		m_materials[i].m_id = gl::load_texture_2d(m_materials[i].m_file);
+		m_shader->set_int(m_materials[i].m_name, i);
+	}
+}
+
 void geometry_node::use_shader()
 {
 	m_shader->use();
@@ -213,4 +260,13 @@ void geometry_node::update_mvp()
 	m_shader->set_matrix4("projection", projection);
 
 	m_shader->set_matrix4("model", /*m_model_matrix*/get_merge_model_matrix());
+}
+
+void geometry_node::active_texture()
+{
+	for (int i = 0; i < m_materials.size(); ++i)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, m_materials[i].m_id);
+	}
 }

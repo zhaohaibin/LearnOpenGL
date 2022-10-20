@@ -71,7 +71,7 @@ basic_lighting_node::basic_lighting_node()
 	};
 	float* vertex_data = new float[3 * 6 * 6];
 	memcpy(vertex_data, vertices, 3 * 6 * 6 * sizeof(float));
-	geo_node->set_vertex(vertex_data, 3 * 6 * 6 * sizeof(float));
+	geo_node->set_vertex(vertex_data, 3 * 6 * 6 * sizeof(float), 0);
 
 	float vertices_normal[] = {
 		0.0f, 0.0f, -1.0f,
@@ -118,7 +118,7 @@ basic_lighting_node::basic_lighting_node()
 	};
 	float* vertex_normal_data = new float[3 * 6 * 6];
 	memcpy(vertex_normal_data, vertices_normal, 3 * 6 * 6 * sizeof(float));
-	geo_node->set_vertex_normal(vertex_normal_data, 3 * 6 * 6 * sizeof(float));
+	geo_node->set_vertex_normal(vertex_normal_data, 3 * 6 * 6 * sizeof(float), 2);
 
 	float vertices_color[] = {
 		0.93f,0.42f, 0.18,1.0f,
@@ -165,7 +165,7 @@ basic_lighting_node::basic_lighting_node()
 	};
 	float* vertex_color_data = new float[4 * 6 * 6];
 	memcpy(vertex_color_data, vertices_color, 4 * 6 * 6 * sizeof(float));
-	geo_node->set_vertex_color(vertex_color_data, 4 * 6 * 6 * sizeof(float));
+	geo_node->set_vertex_color(vertex_color_data, 4 * 6 * 6 * sizeof(float), 1);
 	geo_node->set_primitive(GL_TRIANGLES);
 	geo_node->set_shader_file("./shader/shader.vs", "./shader/shader.fs");
 
