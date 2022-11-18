@@ -31,6 +31,7 @@ protected:
 public:
 	void set_primitive(unsigned int primitive);
 	void set_vertex(float* data, unsigned int length, unsigned int layout_index);
+	void update_vertex(float* data, unsigned int length);
 	void set_vertex_color(float* data, unsigned int length, unsigned int layout_index);
 	void set_vertex_normal(float* data, unsigned int length, unsigned int layout_index);
 	void set_vertex_texture(float* data, unsigned int length, unsigned int layout_index);
@@ -44,6 +45,7 @@ public:
 	void add_material(const std::string& name, const std::string file);
 private:
 	bool setup_vertex_array();
+	bool update_vertex_array();
 	bool setup_vertex_color_array();
 	bool setup_vertex_normal_array();
 	bool setup_vertex_texture_array();
@@ -54,9 +56,11 @@ private:
 	void update_mvp();
 	void active_texture();
 private:
+	unsigned int m_vertex_vbo;
 	float* m_vertex_data;
 	unsigned int m_vertex_data_length;
 	unsigned int m_vertex_layout_index;
+	bool m_vertex_need_update;
 
 	float* m_vertex_color_data;
 	unsigned int m_vertex_color_data_length;

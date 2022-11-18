@@ -12,6 +12,7 @@ geometry_node::geometry_node(glm::mat4 model_matrix /*= glm::mat4(1.0f)*/) : nod
 , m_vertex_color_data_length(0)
 , m_vertex_normal_data(nullptr)
 , m_vertex_normal_data_length(0)
+, m_vertex_need_update(false)
 {
 }
 
@@ -32,6 +33,7 @@ bool geometry_node::initialize()
 	rt = setup_vertex_normal_array();
 	rt = setup_vertex_texture_array();
 	glBindVertexArray(0);
+
 	return true;
 }
 
@@ -40,6 +42,12 @@ void geometry_node::drawing()
 	use_shader();
 	active_texture();
 	glBindVertexArray(m_vao);
+	if (m_vertex_need_update)
+	{
+		m_vertex_need_update = false;
+		update_vertex_array();
+	}
+	glEnable(GL_PROGRAM_POINT_SIZE);
 	glDrawArrays(m_primitive, 0, m_vertex_data_length / (sizeof(float) * 3));
 	glBindVertexArray(0);
 	m_shader->un_use();
@@ -55,6 +63,13 @@ void geometry_node::set_vertex(float* data, unsigned int length, unsigned int la
 	m_vertex_data = data;
 	m_vertex_data_length = length;
 	m_vertex_layout_index = layout_index;
+}
+
+void geometry_node::update_vertex(float* data, unsigned int length)
+{
+	m_vertex_data = data;
+	m_vertex_data_length = length;
+	m_vertex_need_update = true;
 }
 
 void geometry_node::set_vertex_color(float* data, unsigned int length, unsigned int layout_index)
@@ -147,9 +162,17 @@ bool geometry_node::setup_vertex_array()
 	if (m_vertex_data == nullptr)
 		return false;
 
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glGenBuffers(1, &m_vertex_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_vbo);
+	glBufferData(GL_ARRAY_BUFFER, m_vertex_data_length, m_vertex_data, GL_STATIC_DRAW);
+	glVertexAttribPointer(m_vertex_layout_index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(m_vertex_layout_index);
+	return true;
+}
+
+bool geometry_node::update_vertex_array()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_vbo);
 	glBufferData(GL_ARRAY_BUFFER, m_vertex_data_length, m_vertex_data, GL_STATIC_DRAW);
 	glVertexAttribPointer(m_vertex_layout_index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(m_vertex_layout_index);
