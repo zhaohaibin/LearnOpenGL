@@ -6,8 +6,6 @@
 	控制点的显示
 	void glPointParameteri(GLenum pname, GLint param);
 	void glPointParameterf(GLenum pname, GLfloat param);
-	void glPointParameteriv(GLenum pname, const GLint* param);
-	void glPointParameteriv(GLenum pname, const GLfloat* param);
 
 	pname 必须是GL_POINT_SPRITE_COORD_ORIGIN、GL_POINT_FADE_THRESHOLD_SIZE.
 		GL_POINT_SPRITE_COORD_ORIGIN对应的param 必须是GL_LOWER_LEFT或者GL_UPPER_LEFT

@@ -158,6 +158,7 @@
     <ClCompile Include="..\base\line_node.cpp" />
     <ClCompile Include="..\base\mesh_node.cpp" />
     <ClCompile Include="..\base\node.cpp" />
+    <ClCompile Include="..\base\node_state.cpp" />
     <ClCompile Include="..\base\rectangle_node.cpp" />
     <ClCompile Include="..\base\shader.cpp" />
     <ClCompile Include="..\base\stb_image_impl.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="..\base\line_node.h" />
     <ClInclude Include="..\base\mesh_node.h" />
     <ClInclude Include="..\base\node.h" />
+    <ClInclude Include="..\base\node_state.h" />
     <ClInclude Include="..\base\rectangle_node.h" />
     <ClInclude Include="..\base\shader.h" />
     <ClInclude Include="..\base\system_env.h" />

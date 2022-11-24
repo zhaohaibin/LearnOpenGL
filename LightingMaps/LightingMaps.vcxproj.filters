@@ -75,6 +75,9 @@
     <ClCompile Include="lighting_maps_node.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\base\node_state.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\base\framebuffer.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="lighting_maps_node.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node_state.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

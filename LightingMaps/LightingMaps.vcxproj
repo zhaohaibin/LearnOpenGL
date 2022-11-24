@@ -160,6 +160,7 @@
     <ClCompile Include="..\base\node.cpp" />
     <ClCompile Include="..\base\rectangle_node.cpp" />
     <ClCompile Include="..\base\shader.cpp" />
+    <ClCompile Include="..\base\node_state.cpp" />
     <ClCompile Include="..\base\stb_image_impl.cpp" />
     <ClCompile Include="..\base\system_env.cpp" />
     <ClCompile Include="..\base\texture_loader.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="..\base\node.h" />
     <ClInclude Include="..\base\rectangle_node.h" />
     <ClInclude Include="..\base\shader.h" />
+    <ClInclude Include="..\base\node_state.h" />
     <ClInclude Include="..\base\system_env.h" />
     <ClInclude Include="..\base\texture_loader.h" />
     <ClInclude Include="lighting_maps_node.h" />

@@ -78,6 +78,9 @@
     <ClCompile Include="sprite_node.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\base\node_state.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\base\assimp_driver.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="sprite_node.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node_state.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
