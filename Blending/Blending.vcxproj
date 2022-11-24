@@ -161,6 +161,7 @@
     <ClCompile Include="..\base\point_sprite.cpp" />
     <ClCompile Include="..\base\rectangle_node.cpp" />
     <ClCompile Include="..\base\shader.cpp" />
+    <ClCompile Include="..\base\state_set.cpp" />
     <ClCompile Include="..\base\stb_image_impl.cpp" />
     <ClCompile Include="..\base\system_env.cpp" />
     <ClCompile Include="..\base\texture_loader.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="..\base\point_sprite.h" />
     <ClInclude Include="..\base\rectangle_node.h" />
     <ClInclude Include="..\base\shader.h" />
+    <ClInclude Include="..\base\state_set.h" />
     <ClInclude Include="..\base\system_env.h" />
     <ClInclude Include="..\base\texture_loader.h" />
     <ClInclude Include="..\base\viewer.h" />
