@@ -47,7 +47,7 @@ void geometry_node::drawing()
 		m_vertex_need_update = false;
 		update_vertex_array();
 	}
-	glEnable(GL_PROGRAM_POINT_SIZE);
+	//glEnable(GL_PROGRAM_POINT_SIZE);
 	glDrawArrays(m_primitive, 0, m_vertex_data_length / (sizeof(float) * 3));
 	glBindVertexArray(0);
 	m_shader->un_use();
@@ -215,7 +215,7 @@ bool geometry_node::setup_vertex_texture_array()
 	unsigned int vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, m_vertex_texture_coord_data_lenght, m_vertex_normal_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, m_vertex_texture_coord_data_lenght, m_vertex_texture_coord_data, GL_STATIC_DRAW);
 	glVertexAttribPointer(m_vertex_texture_coord_layout_index, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(m_vertex_texture_coord_layout_index);
 	return true;
