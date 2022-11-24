@@ -42,6 +42,7 @@ void geometry_node::drawing()
 	use_shader();
 	active_texture();
 	glBindVertexArray(m_vao);
+	m_state_set.do_set_state();
 	if (m_vertex_need_update)
 	{
 		m_vertex_need_update = false;
@@ -155,6 +156,11 @@ void geometry_node::add_material(const std::string& name, const std::string file
 	_material.m_file = file;
 
 	m_materials.push_back(_material);
+}
+
+node_state* geometry_node::get_state_set()
+{
+	return &m_state_set;
 }
 
 bool geometry_node::setup_vertex_array()

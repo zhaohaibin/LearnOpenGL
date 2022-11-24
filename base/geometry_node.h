@@ -3,6 +3,7 @@
 #include "node.h"
 #include <map>
 #include <vector>
+#include "node_state.h"
 
 class geometry_node : public node
 {
@@ -43,6 +44,8 @@ public:
 	void set_shader_value(const std::string& name, const glm::vec4& value);
 
 	void add_material(const std::string& name, const std::string file);
+
+	node_state* get_state_set();
 private:
 	bool setup_vertex_array();
 	bool update_vertex_array();
@@ -79,6 +82,8 @@ private:
 	shader_uniform_value m_shader_uniform_value;
 
 	std::vector<material> m_materials;
+
+	node_state m_state_set;
 };
 
 #endif //_GEOMETRY_NODE_H
