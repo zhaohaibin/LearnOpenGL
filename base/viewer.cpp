@@ -131,7 +131,8 @@ int viewer::run()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+	//每个屏幕坐标就会使用一个包含4个子采样点的颜色缓冲
+	glfwWindowHint(GLFW_SAMPLES, 4);
 	view_port& vp = system_env::instance()->get_view_port();
 	GLFWwindow* window = glfwCreateWindow(vp.m_width, vp.m_height, "LearnOpenGL", NULL, NULL);
 	if (window == NULL)
@@ -156,7 +157,8 @@ int viewer::run()
 	_lastTime = (float)glfwGetTime();
 
 	glEnable(GL_DEPTH_TEST);
-
+	//启用多重采样
+	glEnable(GL_MULTISAMPLE);
 	int rate = 0;
 	time_t last_time = time(0);
 	while (!glfwWindowShouldClose(window))

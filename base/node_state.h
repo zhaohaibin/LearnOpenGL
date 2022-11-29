@@ -5,6 +5,7 @@ using namespace std;
 
 class geometry_node;
 
+
 class node_state
 {
 	friend class geometry_node;
