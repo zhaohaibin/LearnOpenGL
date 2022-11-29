@@ -14,7 +14,7 @@ void main()
         color = texture(texture_1, frag_texture_coord);
     }else
     {
-        color = texture(texture_2, vec2(frag_texture_coord.x - offset.x, frag_texture_coord.y));
+        color = texture(texture_2, frag_texture_coord);
     }
     frag_color = color;
 }
