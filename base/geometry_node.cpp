@@ -13,6 +13,7 @@ geometry_node::geometry_node(glm::mat4 model_matrix /*= glm::mat4(1.0f)*/) : nod
 , m_vertex_normal_data(nullptr)
 , m_vertex_normal_data_length(0)
 , m_vertex_need_update(false)
+, m_vertex_texture_coord_data(nullptr)
 {
 }
 

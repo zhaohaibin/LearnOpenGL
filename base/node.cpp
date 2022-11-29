@@ -13,6 +13,8 @@ node::node(glm::mat4 model_matrix/* = glm::mat4(1.0f)*/)
 	, m_model_matrix(model_matrix)
 	, m_before_rendering_update_callback(nullptr)
 	, m_id(0)
+	, m_parent_node(nullptr)
+	, m_shader(nullptr)
 {
 
 }
