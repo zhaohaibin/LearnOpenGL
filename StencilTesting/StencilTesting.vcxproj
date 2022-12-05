@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{01FA5140-7DE1-4032-8B6E-D09A4E46315D}</ProjectGuid>
+    <ProjectGuid>{C99E000F-C0C2-4F49-9AB0-B462EF66D6BA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>FaceCulling</RootNamespace>
+    <RootNamespace>StencilTesting</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,7 +88,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,14 +101,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../third_party/stb;../../third_party/glm;../../third_party/glad/include;../../third_party/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../third_party/stb;../../third_party/glm;../../third_party/glad/include;../../third_party/glfw/include;D:/Workspace/third_party/v140-x64/Assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../third_party/glfw/build/src/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenGL32.Lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.Lib;glfw3d.lib;D:\Workspace\opengl\WorkSpace\third_party\assimp\build\lib\Debug\assimp-vc140-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,7 +119,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +136,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,32 +146,42 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\third_party\glad\src\glad.c" />
+    <ClCompile Include="..\base\assimp_driver.cpp" />
     <ClCompile Include="..\base\camera.cpp" />
     <ClCompile Include="..\base\entity\cube.cpp" />
     <ClCompile Include="..\base\framebuffer.cpp" />
     <ClCompile Include="..\base\geometry_node.cpp" />
+    <ClCompile Include="..\base\mesh_node.cpp" />
     <ClCompile Include="..\base\node.cpp" />
     <ClCompile Include="..\base\node_state.cpp" />
+    <ClCompile Include="..\base\point_sprite.cpp" />
     <ClCompile Include="..\base\rectangle_node.cpp" />
     <ClCompile Include="..\base\shader.cpp" />
     <ClCompile Include="..\base\stb_image_impl.cpp" />
     <ClCompile Include="..\base\system_env.cpp" />
     <ClCompile Include="..\base\texture_loader.cpp" />
-    <ClCompile Include="face_culling_node.cpp" />
+    <ClCompile Include="..\base\texture_style.cpp" />
+    <ClCompile Include="..\base\viewer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stencil_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\base\assimp_driver.h" />
     <ClInclude Include="..\base\camera.h" />
     <ClInclude Include="..\base\entity\cube.h" />
     <ClInclude Include="..\base\framebuffer.h" />
     <ClInclude Include="..\base\geometry_node.h" />
+    <ClInclude Include="..\base\mesh_node.h" />
     <ClInclude Include="..\base\node.h" />
     <ClInclude Include="..\base\node_state.h" />
+    <ClInclude Include="..\base\point_sprite.h" />
     <ClInclude Include="..\base\rectangle_node.h" />
     <ClInclude Include="..\base\shader.h" />
     <ClInclude Include="..\base\system_env.h" />
     <ClInclude Include="..\base\texture_loader.h" />
-    <ClInclude Include="face_culling_node.h" />
+    <ClInclude Include="..\base\texture_style.h" />
+    <ClInclude Include="..\base\viewer.h" />
+    <ClInclude Include="stencil_test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

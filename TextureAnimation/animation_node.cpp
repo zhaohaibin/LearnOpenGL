@@ -125,8 +125,10 @@ animation_node::animation_node()
 {
 	m_callback = new animation_before_rendering_update_callback;
 	geometry_node* p = new geometry_node;
-	p->set_vertex_shader_file("./shader/shader.vs");
-	p->set_frag_shader_file("./shader/shader.fs");
+	shader_file _file;
+	_file.m_vertex_shader_file = "./shader/shader.vs";
+	_file.m_frag_shader_file = "./shader/shader.fs";
+	p->create_shader(_file);
 	p->add_material("texture_1", "./shader/right.png");
 	p->set_vertex(rect, sizeof(rect), 0);
 	p->set_vertex_texture(texture_coord, sizeof(texture_coord), 1);
@@ -138,8 +140,9 @@ animation_node::animation_node()
 	add_child(p);
 
 	p = new geometry_node;
-	p->set_vertex_shader_file("./shader/shader_2.vs");
-	p->set_frag_shader_file("./shader/shader_2.fs");
+	_file.m_vertex_shader_file = "./shader/shader_2.vs";
+	_file.m_frag_shader_file = "./shader/shader_2.fs";
+	p->create_shader(_file);
 	p->add_material("texture_1", "./shader/right.png");
 	p->add_material("texture_2", "./shader/wood.png");
 	p->set_vertex(rect_1, sizeof(rect_1), 0);
@@ -149,12 +152,13 @@ animation_node::animation_node()
 	p->set_before_rendering_update_callback(m_callback);
 	p->set_id(1);
 	add_child(p);
-
+// 
 	glm::mat4 model(1.0);
 	model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
 	p = new geometry_node(model);
-	p->set_vertex_shader_file("./shader/shader_2.vs");
-	p->set_frag_shader_file("./shader/shader_3.fs");
+	_file.m_vertex_shader_file = "./shader/shader_2.vs";
+	_file.m_frag_shader_file = "./shader/shader_3.fs";
+	p->create_shader(_file);
 	p->add_material("texture_1", "./shader/right.png");
 	p->add_material("texture_2", "./shader/wood.png");
 	p->set_vertex(rect_1, sizeof(rect_1), 0);
@@ -164,12 +168,13 @@ animation_node::animation_node()
 	p->set_before_rendering_update_callback(m_callback);
 	p->set_id(2);
 	add_child(p);
-
+// 
 	model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(-1.0f, -1.0f, 0.0f));
 	p = new geometry_node(model);
-	p->set_vertex_shader_file("./shader/shader_2.vs");
-	p->set_frag_shader_file("./shader/shader_4.fs");
+	_file.m_vertex_shader_file = "./shader/shader_2.vs";
+	_file.m_frag_shader_file = "./shader/shader_4.fs";
+	p->create_shader(_file);
 	p->add_material("texture_1", "./shader/right.png");
 	p->add_material("texture_2", "./shader/wood.png");
 	p->set_vertex(rect_1, sizeof(rect_1), 0);

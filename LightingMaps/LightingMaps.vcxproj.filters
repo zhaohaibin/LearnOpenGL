@@ -36,9 +36,6 @@
     <ClCompile Include="..\base\assimp_driver.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\cube.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\base\shader.cpp">
       <Filter>base</Filter>
     </ClCompile>
@@ -55,9 +52,6 @@
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\framebuffer.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\line_node.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\texture_loader.cpp">
@@ -101,13 +95,7 @@
     <ClInclude Include="..\base\mesh_node.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\line_node.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\base\rectangle_node.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\base\cube.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\base\system_env.h">

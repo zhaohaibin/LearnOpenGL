@@ -2,10 +2,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <ctime>
+#include <iostream>
 #include "../base/system_env.h"
 #include "../base/camera.h"
 #include "../base/node.h"
-#include "../base/cube.h"
 #include "../base/rectangle_node.h"
 #include "lighting_maps_node.h"
 
@@ -182,7 +182,7 @@ int main()
 		time_t ctime = time(0);
 		if (ctime - last_time >= 1)
 		{
-			std::cout << rate << " frame / s" << endl;
+			std::cout << rate << " frame / s" << std::endl;
 			last_time = ctime;
 			rate = 0;
 		}

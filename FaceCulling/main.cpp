@@ -5,7 +5,6 @@
 #include "../base/system_env.h"
 #include "../base/camera.h"
 #include "../base/node.h"
-#include "../base/cube.h"
 #include "../base/rectangle_node.h"
 #include "face_culling_node.h"
 

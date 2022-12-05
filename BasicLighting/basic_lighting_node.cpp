@@ -1,9 +1,9 @@
 #include "basic_lighting_node.h"
-#include "../base/cube.h"
 
 #include "../base/geometry_node.h"
 #include "../base/system_env.h"
 #include "../base/camera.h"
+#include "glad/glad.h"
 
 
 class geometry_node_before_rendering_update_callback : public node_before_rendering_update_callback
@@ -167,8 +167,11 @@ basic_lighting_node::basic_lighting_node()
 	memcpy(vertex_color_data, vertices_color, 4 * 6 * 6 * sizeof(float));
 	geo_node->set_vertex_color(vertex_color_data, 4 * 6 * 6 * sizeof(float), 1);
 	geo_node->set_primitive(GL_TRIANGLES);
-	geo_node->set_shader_file("./shader/shader.vs", "./shader/shader.fs");
-
+	//geo_node->set_shader_file("./shader/shader.vs", "./shader/shader.fs");
+	shader_file _file;
+	_file.m_vertex_shader_file = "./shader/shader.vs";
+	_file.m_frag_shader_file = "./shader/shader.fs";
+	geo_node->create_shader(_file);
 	geo_node->set_shader_value("light_color", glm::vec3(1.0f, 1.0f, 1.0f));
 	geo_node->set_shader_value("light_pos", glm::vec3(1.0f, 1.0f, 2.0f));
 	this->add_child(geo_node);

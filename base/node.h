@@ -3,6 +3,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 #include <glm/glm.hpp>
 
 class node;
@@ -20,6 +21,12 @@ namespace gl
 {
 	class shader;
 }
+
+struct shader_file
+{
+	std::string m_vertex_shader_file;
+	std::string m_frag_shader_file;
+};
 
 class node
 {
@@ -39,22 +46,29 @@ public:
 	glm::mat4 get_merge_model_matrix();
 	glm::mat4 get_projection_matrix4();
 
-	void set_vertex_shader_file(const std::string& file);
-	void set_frag_shader_file(const std::string& file);
+	unsigned int create_shader(const shader_file& file);
+	void switch_shader(unsigned char index);
 protected:
 	virtual bool initialize();
 	virtual void drawing();
 	virtual void do_render_childs();
 
+	bool setup_shader();
+	virtual void update_uniform_value();
+	virtual void setup_texture();
+
+	//获取当前选则的shader
+	gl::shader* get_shader();
+
+	void use_shader();
+
+	void un_use_shader();
 private:
 	void do_set_matrix();
 	glm::mat4 get_ancestors_model();
 protected:
 	unsigned int m_vao;
 	unsigned int m_ebo;
-	gl::shader* m_shader;
-	std::string m_vertex_shader_file;
-	std::string m_frag_shader_file;
 	bool m_model_matrix_need_update;
 	glm::mat4 m_model_matrix;
 
@@ -67,5 +81,10 @@ private:
 	childs m_childs;
 	node_before_rendering_update_callback* m_before_rendering_update_callback;
 
+
+	//支持多个着色器
+	std::vector<shader_file> m_shader_files;
+	std::vector<gl::shader*> m_shaders;
+	unsigned char m_curent_shader_index;
 };
 #endif //_NODE_H

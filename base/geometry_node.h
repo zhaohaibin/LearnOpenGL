@@ -7,6 +7,7 @@
 
 class geometry_node : public node
 {
+public:
 	struct shader_uniform_value
 	{
 		std::map<std::string, unsigned int> m_uint_value;
@@ -35,15 +36,21 @@ public:
 	void update_vertex(float* data, unsigned int length);
 	void set_vertex_color(float* data, unsigned int length, unsigned int layout_index);
 	void set_vertex_normal(float* data, unsigned int length, unsigned int layout_index);
-	void set_vertex_texture(float* data, unsigned int length, unsigned int layout_index);
-	void set_shader_file(const std::string& vertex_shader_file, const std::string& frag_shader_file);
+	void set_vertex_texture(float* data, unsigned int length, unsigned int layout_index, unsigned int step = 2);
 
+	//设置element
+	// @data 指向索引数据
+	// @length 索引个数
+	void set_elements(unsigned int* data, unsigned int length);
+
+	void set_draw_array(bool is_draw_array);
 	void set_shader_value(const std::string& name, unsigned int value);
 	void set_shader_value(const std::string& name, float value);
 	void set_shader_value(const std::string& name, const glm::vec3& value);
 	void set_shader_value(const std::string& name, const glm::vec4& value);
 
 	void add_material(const std::string& name, const std::string file);
+	void add_material(const material& _material);
 
 	node_state* get_state_set();
 private:
@@ -52,10 +59,11 @@ private:
 	bool setup_vertex_color_array();
 	bool setup_vertex_normal_array();
 	bool setup_vertex_texture_array();
-	bool setup_shader();
+	bool setup_element();
+
 	void update_uniform_value();
 	void setup_texture();
-	void use_shader();
+	void do_use_shader();
 	void update_mvp();
 	void active_texture();
 private:
@@ -76,8 +84,14 @@ private:
 	float* m_vertex_texture_coord_data;
 	unsigned int m_vertex_texture_coord_data_lenght;
 	unsigned int m_vertex_texture_coord_layout_index;
+	unsigned int m_vertex_texture_coord_step;
+
+	//基于索引绘制的数据
+	unsigned int* m_element_data;
+	unsigned int m_element_count;
 
 	unsigned int m_primitive;
+	bool m_is_draw_arrays;
 
 	shader_uniform_value m_shader_uniform_value;
 

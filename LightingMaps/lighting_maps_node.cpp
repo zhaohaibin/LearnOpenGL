@@ -172,8 +172,10 @@ lighting_maps_node::lighting_maps_node()
 	memcpy(vertex_texture_data, texture, 2 * 6 * 6 * sizeof(float));
 	geo_node->set_vertex_texture(vertex_texture_data, 2 * 6 * 6 * sizeof(float), 2);
 
-	geo_node->set_vertex_shader_file("./resource/shader/shader.vs");
-	geo_node->set_frag_shader_file("./resource/shader/shader.fs");
+	shader_file _file;
+	_file.m_vertex_shader_file = "./resource/shader/shader.vs";
+	_file.m_frag_shader_file = "./resource/shader/shader.fs";
+	geo_node->create_shader(_file);
 	geo_node->set_shader_value("light", glm::vec3(1.0f, 1.0f, 1.0f));
 	geo_node->set_shader_value("light_pos", glm::vec3(1.0f, 1.0f, 2.0f));
 

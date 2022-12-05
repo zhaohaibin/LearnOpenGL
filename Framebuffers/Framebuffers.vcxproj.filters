@@ -25,6 +25,9 @@
     <Filter Include="third_party\glad\src">
       <UniqueIdentifier>{082fc2b7-5c66-4329-85d3-b1faa75bdba3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\entity">
+      <UniqueIdentifier>{2ddadf41-9d03-40b1-8c67-ac2ccfa8d0b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,10 +60,16 @@
     <ClCompile Include="framebuffer_node.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\cube.cpp">
+    <ClCompile Include="..\base\rectangle_node.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\rectangle_node.cpp">
+    <ClCompile Include="..\base\entity\cube.cpp">
+      <Filter>base\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\geometry_node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\node_state.cpp">
       <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,10 +95,16 @@
     <ClInclude Include="framebuffer_node.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\cube.h">
+    <ClInclude Include="..\base\rectangle_node.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\rectangle_node.h">
+    <ClInclude Include="..\base\entity\cube.h">
+      <Filter>base\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\geometry_node.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node_state.h">
       <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "vegetation_node.h"
+ï»¿#include "vegetation_node.h"
 #include "../base/geometry_node.h"
 
 #include <vector>
@@ -28,24 +28,28 @@ vegetation_node::vegetation_node()
 	geometry_node* vegetation = new geometry_node;
 	vegetation->set_vertex(vertex_data, sizeof(vertex_data), 0);
 	vegetation->set_vertex_texture(texture_coord, sizeof(texture_coord), 1);
-	vegetation->set_vertex_shader_file("./shader/vegetation.vs");
-	vegetation->set_frag_shader_file("./shader/vegetation.fs");
+	shader_file _file;
+	_file.m_vertex_shader_file = "./shader/vegetation.vs";
+	_file.m_frag_shader_file = "./shader/vegetation.fs";
+	vegetation->create_shader(_file);
 	vegetation->add_material("texture_1", "./resources/grass.png");
 	vegetation->set_primitive(GL_TRIANGLES);
 	add_child(vegetation);
 
+
 	glm::mat4 model = glm::mat4(1.0);
-	//ÑØX·½ÏòÒÆ¶¯-0.5£¬Y·½ÏòÒÆ¶¯-0.3£¬Z·½ÏòÒÆ¶¯1.0
+	//æ²¿Xæ–¹å‘ç§»åŠ¨-0.5ï¼ŒYæ–¹å‘ç§»åŠ¨-0.3ï¼ŒZæ–¹å‘ç§»åŠ¨1.0
 	model = glm::translate(model, glm::vec3(-2.0f, 2.0f, -1.0f));
 
 	vegetation = new geometry_node(model);
-	state_set* _state = vegetation->get_state_set();
+	node_state* _state = vegetation->get_state_set();
 	_state->enable_blend();
 	_state->set_blend_func(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	vegetation->set_vertex(vertex_data, sizeof(vertex_data), 0);
 	vegetation->set_vertex_texture(texture_coord, sizeof(texture_coord), 1);
-	vegetation->set_vertex_shader_file("./shader/vegetation.vs");
-	vegetation->set_frag_shader_file("./shader/vegetation_2.fs");
+	_file.m_vertex_shader_file = "./shader/vegetation.vs";
+	_file.m_frag_shader_file = "./shader/vegetation_2.fs";
+	vegetation->create_shader(_file);
 	vegetation->add_material("texture_1", "./resources/grass.png");
 	vegetation->set_primitive(GL_TRIANGLES);
 	add_child(vegetation);

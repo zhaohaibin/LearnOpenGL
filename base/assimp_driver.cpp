@@ -6,6 +6,8 @@
 #include "mesh_node.h"
 #include "texture_loader.h"
 #include "assimp/material.h"
+#include "geometry_node.h"
+#include "glad/glad.h"
 
 namespace driver
 {
@@ -129,7 +131,65 @@ namespace driver
 		/*const aiMaterialProperty *const prop = material->mProperties[0];
 		aiString s;
 		aiGetMaterialString(material, prop->mKey.data, prop->mSemantic, prop->mIndex, &s);*/
-		return new mesh_node(_mesh);
+		//return new mesh_node(_mesh);
+		return create_node(_mesh);
+	}
+
+	node* assimp_driver::create_node(mesh* _mesh)
+	{
+		geometry_node* geo_node = new geometry_node;
+		shader_file _shader_file;
+		const string path = "D:/Workspace/opengl/WorkSpace/LearnOpenGL/base/";
+		_shader_file.m_vertex_shader_file = path + "/shader/mesh_node/shader.vs";
+		_shader_file.m_frag_shader_file = path + "/shader/mesh_node/shader.fs";
+		geo_node->create_shader(_shader_file);
+		geo_node->set_vertex(_mesh->m_vertex, _mesh->m_vertex_numbers * sizeof(float) * 3, 0);
+		if (_mesh->m_normal != nullptr)
+		{
+			geo_node->set_vertex_normal(_mesh->m_normal, _mesh->m_vertex_numbers * sizeof(float) * 3, 1);
+		}
+		if (_mesh->m_texcoords != nullptr)
+		{
+			geo_node->set_vertex_texture(_mesh->m_texcoords, _mesh->m_vertex_numbers * sizeof(float) * 3, 2, 3);
+		}
+		if (_mesh->m_tangent != nullptr)
+		{
+			
+		}
+		else if (_mesh->m_bittangent != nullptr)
+		{
+
+		}
+		geo_node->set_elements(_mesh->m_index, _mesh->m_index_count);
+		//…Ë÷√Œ∆¿Ì
+		unsigned int diffuseNr = 1;
+		unsigned int specularNr = 1;
+		unsigned int normalNr = 1;
+		unsigned int heightNr = 1;
+		for (unsigned int i = 0; i < _mesh->m_textures.size(); ++i)
+		{
+			texture _texture = _mesh->m_textures[i];
+			int num = 0;
+			if (_texture.m_type == "texture_diffuse")
+				num = diffuseNr++;
+			else if (_texture.m_type == "texture_specular")
+				num = specularNr++;
+			else if (_texture.m_type == "texture_normal")
+				num = normalNr++;
+			else if (_texture.m_type == "texture_height")
+				num = heightNr++;
+			string  name = _texture.m_type + "_" + std::to_string(num);
+			// 			unsigned int id = _mesh->m_textures[i].m_id;
+			// 			m_shader->set_int(name, i);
+			geometry_node::material _material;
+			_material.m_file = _mesh->m_textures[i].m_path;
+			_material.m_name = name;
+			_material.m_id = _mesh->m_textures[i].m_id;
+			geo_node->add_material(_material);
+		}
+		geo_node->set_primitive(GL_TRIANGLES);
+		geo_node->set_draw_array(false);
+		return geo_node;
 	}
 
 	void assimp_driver::do_get_texture(std::vector<texture>& textures, aiMaterial *mat, int type, const std::string& typeName)

@@ -1,8 +1,10 @@
 #include "face_culling_node.h"
-#include "../base/cube.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glad/glad.h>
 
+#include "../base/entity/cube.h"
+using namespace entity;
 face_culling_node::face_culling_node()
 {
 	glm::mat4 model(1.0f);

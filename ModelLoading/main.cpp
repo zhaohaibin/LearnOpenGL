@@ -5,7 +5,6 @@
 #include "../base/system_env.h"
 #include "../base/camera.h"
 #include "../base/node.h"
-#include "../base/cube.h"
 #include "../base/rectangle_node.h"
 #include "../base/assimp_driver.h"
 #include <ctime>
@@ -160,8 +159,8 @@ int main()
 
 	node* root = new node;
 	driver::assimp_driver reader;
-	//node* _node = reader.read_file("D:/Workspace/opengl/LearnOpenGL/resources/objects/backpack/backpack.obj");
-	node* _node = reader.read_file("D:/Workspace/opengl/LearnOpenGL/resources/objects/Lamp/Lamp.obj");
+	node* _node = reader.read_file("D:/Workspace/opengl/LearnOpenGL/resources/objects/backpack/backpack.obj");
+	//node* _node = reader.read_file("D:/Workspace/opengl/LearnOpenGL/resources/objects/Lamp/Lamp.obj");
 	glm::mat4 model(1.0f);
 	//model = glm::translate(model, glm::vec3(1.5, 1.5, -3.0));
 	_node->set_model_matrix(model);
@@ -189,7 +188,7 @@ int main()
 		time_t ctime = time(0);
 		if (ctime - last_time >= 1)
 		{
-			std::cout << rate << " frame / s" << endl;
+			std::cout << rate << " frame / s" << std::endl;
 			last_time = ctime;
 			rate = 0;
 		}

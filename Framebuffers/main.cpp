@@ -18,7 +18,7 @@ OpenGL允许我们定义我们自己的帧缓冲，也就是说我们能够定义我们自己的颜色缓冲，甚至
 #include "../base/camera.h"
 #include "../base/node.h"
 #include "framebuffer_node.h"
-#include "../base/cube.h"
+#include "../base/entity/cube.h"
 #include "../base/rectangle_node.h"
 
 float _deltaTime = 0.0f;
@@ -182,11 +182,11 @@ int main()
 	model = glm::rotate(model, 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	//root->add_child(new rectangle_node(0.6f, 0.6f, glm::mat4(1.0)));
 
-	root->add_child(new cube(0.3f, "../resource/texture/container.jpg", model));
+	root->add_child(new entity::cube(0.3f, "../resource/texture/container.jpg", model));
 
 	framebuffer_node* fn =  new framebuffer_node();
 	fn->add_child(new rectangle_node(0.6f, 0.6f, "../resource/texture/container.jpg", model));
-	fn->add_child(new cube(0.3f, "../resource/texture/container.png", model));
+	fn->add_child(new entity::cube(0.3f, "../resource/texture/container.png", model));
 	root->add_child(fn);
 	setup_scene(root);
 	glEnable(GL_DEPTH_TEST);

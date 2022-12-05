@@ -25,6 +25,9 @@
     <Filter Include="third_party\glad\src">
       <UniqueIdentifier>{c575d7e8-eeb3-442b-baf7-e121e22f33ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\entity">
+      <UniqueIdentifier>{7b916b0b-d48e-42f5-9d2c-8fec6c4dbc96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,13 +39,7 @@
     <ClCompile Include="..\base\camera.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\cube.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\base\framebuffer.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\line_node.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\node.cpp">
@@ -66,18 +63,21 @@
     <ClCompile Include="face_culling_node.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\base\entity\cube.cpp">
+      <Filter>base\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\geometry_node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\node_state.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\base\camera.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\cube.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\base\framebuffer.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\base\line_node.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\base\node.h">
@@ -97,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="face_culling_node.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\entity\cube.h">
+      <Filter>base\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\geometry_node.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node_state.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

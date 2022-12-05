@@ -20,7 +20,7 @@ namespace driver
 		node* do_load_file(const std::string& file);
 		node* process_node(aiNode* _aiNode, const aiScene* _aiScene);
 		node* process_mesh(aiMesh* _aiMesh, const aiScene* _aiScene);
-
+		node* create_node(mesh* _mesh);
 		void do_get_texture(std::vector<texture>& textures, aiMaterial *mat, int type, const std::string& typeName);
 		bool find_texture(const std::string& path, texture& _texture);
 	private:

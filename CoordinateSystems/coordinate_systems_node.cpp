@@ -1,10 +1,12 @@
 #include "coordinate_systems_node.h"
-#include "../base/cube.h"
 #include "../base/line_node.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
 #include "../base/rectangle_node.h"
+#include "../base/entity/cube.h"
+
+using namespace entity;
 
 coordinate_systems_node::coordinate_systems_node()
 	: node()
@@ -30,7 +32,7 @@ coordinate_systems_node::coordinate_systems_node()
 	points.push_back(point(10.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0));
 	points.push_back(point(0.0, 0.0, -10.0, 0.0, 0.0, 1.0, 1.0));
 	points.push_back(point(0.0, 0.0, 10.0, 0.0, 0.0, 1.0, 1.0));
-	this->add_child(new line_node(points));
+	//this->add_child(new line_node(points));
 
 	model = glm::mat4(1.0);
 	node* p_node = new rectangle_node(0.5, 0.5, "../resource/texture/albedo.png", model);

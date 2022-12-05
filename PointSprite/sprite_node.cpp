@@ -42,8 +42,10 @@ sprite_node::sprite_node()
 {
 	point_sprite* _point_prite = new point_sprite(1.0);
 	_point_prite->set_vertex(vertex_data, 100*3*sizeof(float), 0);
-	_point_prite->set_vertex_shader_file("./shader/shader.vs");
-	_point_prite->set_frag_shader_file("./shader/shader.fs");
+	shader_file _file;
+	_file.m_vertex_shader_file = "./shader/shader.vs";
+	_file.m_frag_shader_file = "./shader/shader.fs";
+	_point_prite->create_shader(_file);
 	_point_prite->add_material("texture_1", "./resources/awesomeface.png");
 	_point_prite->set_before_rendering_update_callback(new sprite_node_update_callback());
 	add_child(_point_prite);
@@ -52,8 +54,9 @@ sprite_node::sprite_node()
 	model = glm::translate(model, glm::vec3(-0.2f, 0.3f, 1.0f));
 	_point_prite = new point_sprite(1.0, model);
 	_point_prite->set_vertex(vertex_data, 100 * 3 * sizeof(float), 0);
-	_point_prite->set_vertex_shader_file("./shader/shader.vs");
-	_point_prite->set_frag_shader_file("./shader/shader.fs");
+	_file.m_vertex_shader_file = "./shader/shader.vs";
+	_file.m_frag_shader_file = "./shader/shader.fs";
+	_point_prite->create_shader(_file);
 	_point_prite->add_material("texture_1", "./resources/awesomeface.png");
 	_point_prite->set_before_rendering_update_callback(new sprite_node_update_callback());
 	add_child(_point_prite);

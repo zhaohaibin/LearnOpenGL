@@ -39,16 +39,10 @@
     <ClCompile Include="..\base\camera.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\cube.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\base\framebuffer.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\geometry_node.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\line_node.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\mesh_node.cpp">
@@ -89,16 +83,10 @@
     <ClInclude Include="..\base\camera.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\cube.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\base\framebuffer.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\base\geometry_node.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\base\line_node.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\base\mesh_node.h">

@@ -14,56 +14,65 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="base">
-      <UniqueIdentifier>{3468cdea-fba3-4ee1-a3fe-ac39568d0f5a}</UniqueIdentifier>
+      <UniqueIdentifier>{22e33454-77e6-45fc-bc8a-623c9477c577}</UniqueIdentifier>
     </Filter>
     <Filter Include="third_party">
-      <UniqueIdentifier>{3e51eab1-21df-431a-907e-1fca53313588}</UniqueIdentifier>
+      <UniqueIdentifier>{31e1f792-f1f1-4270-9790-ca31b8ad3b9c}</UniqueIdentifier>
     </Filter>
     <Filter Include="third_party\glad">
-      <UniqueIdentifier>{0d0662f0-006e-49de-81f7-479031de4120}</UniqueIdentifier>
+      <UniqueIdentifier>{56237df1-cee7-4a71-a77b-aaa632b82a8b}</UniqueIdentifier>
     </Filter>
     <Filter Include="third_party\glad\src">
-      <UniqueIdentifier>{d829df09-3b52-409d-b85a-b7ba0e5f10c4}</UniqueIdentifier>
+      <UniqueIdentifier>{51d1c089-4b72-4eb3-9f39-eeb916e75411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\entity">
+      <UniqueIdentifier>{363e4f6d-b939-4c6a-bd70-434ddc589071}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\base\camera.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\framebuffer.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\geometry_node.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\node.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="..\base\node_state.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\point_sprite.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\rectangle_node.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\shader.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\stb_image_impl.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\base\system_env.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\texture_loader.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\texture_style.cpp">
+    <ClCompile Include="..\base\point_sprite.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\system_env.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\stb_image_impl.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\geometry_node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\assimp_driver.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\base\viewer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\shader.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\mesh_node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\camera.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\rectangle_node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\texture_style.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\framebuffer.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\third_party\glad\src\glad.c">
@@ -72,33 +81,33 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="animation_node.cpp">
+    <ClCompile Include="stencil_test.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\entity\cube.cpp">
+      <Filter>base\entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\base\camera.h">
+    <ClInclude Include="..\base\shader.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\framebuffer.h">
+    <ClInclude Include="..\base\texture_style.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\geometry_node.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\base\node.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\base\node_state.h">
+    <ClInclude Include="..\base\assimp_driver.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\base\point_sprite.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="..\base\mesh_node.h">
+      <Filter>base</Filter>
+    </ClInclude>
     <ClInclude Include="..\base\rectangle_node.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\shader.h">
+    <ClInclude Include="..\base\node_state.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\base\system_env.h">
@@ -107,14 +116,26 @@
     <ClInclude Include="..\base\texture_loader.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\base\texture_style.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="..\base\viewer.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="animation_node.h">
+    <ClInclude Include="..\base\geometry_node.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\framebuffer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\camera.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="stencil_test.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\entity\cube.h">
+      <Filter>base\entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

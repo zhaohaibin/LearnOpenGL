@@ -152,19 +152,18 @@
     <ClCompile Include="..\..\third_party\glad\src\glad.c" />
     <ClCompile Include="..\base\assimp_driver.cpp" />
     <ClCompile Include="..\base\camera.cpp" />
-    <ClCompile Include="..\base\cube.cpp" />
     <ClCompile Include="..\base\framebuffer.cpp" />
     <ClCompile Include="..\base\geometry_node.cpp" />
-    <ClCompile Include="..\base\line_node.cpp" />
     <ClCompile Include="..\base\mesh_node.cpp" />
     <ClCompile Include="..\base\node.cpp" />
+    <ClCompile Include="..\base\node_state.cpp" />
     <ClCompile Include="..\base\point_sprite.cpp" />
     <ClCompile Include="..\base\rectangle_node.cpp" />
     <ClCompile Include="..\base\shader.cpp" />
-    <ClCompile Include="..\base\state_set.cpp" />
     <ClCompile Include="..\base\stb_image_impl.cpp" />
     <ClCompile Include="..\base\system_env.cpp" />
     <ClCompile Include="..\base\texture_loader.cpp" />
+    <ClCompile Include="..\base\texture_style.cpp" />
     <ClCompile Include="..\base\viewer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="vegetation_node.cpp" />
@@ -172,18 +171,17 @@
   <ItemGroup>
     <ClInclude Include="..\base\assimp_driver.h" />
     <ClInclude Include="..\base\camera.h" />
-    <ClInclude Include="..\base\cube.h" />
     <ClInclude Include="..\base\framebuffer.h" />
     <ClInclude Include="..\base\geometry_node.h" />
-    <ClInclude Include="..\base\line_node.h" />
     <ClInclude Include="..\base\mesh_node.h" />
     <ClInclude Include="..\base\node.h" />
+    <ClInclude Include="..\base\node_state.h" />
     <ClInclude Include="..\base\point_sprite.h" />
     <ClInclude Include="..\base\rectangle_node.h" />
     <ClInclude Include="..\base\shader.h" />
-    <ClInclude Include="..\base\state_set.h" />
     <ClInclude Include="..\base\system_env.h" />
     <ClInclude Include="..\base\texture_loader.h" />
+    <ClInclude Include="..\base\texture_style.h" />
     <ClInclude Include="..\base\viewer.h" />
     <ClInclude Include="vegetation_node.h" />
   </ItemGroup>
