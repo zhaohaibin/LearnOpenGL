@@ -29,12 +29,20 @@
 		GL_DECR_WRAP		与GL_DECR一样，但如果模板值小与0，则将其值设置为最大值。
 		GL_INVERT				按位翻转当前的模板缓冲中
 */
+
+namespace entity
+{
+	class cube;
+}
 class stencil_test : public node
 {
 public:
 	stencil_test();
 
 protected:
-/*	virtual void do_render_childs();*/
+	virtual void do_render_childs();
+
+private:
+	entity::cube* m_cube;
 };
 #endif //_STENCIL_TEST_H

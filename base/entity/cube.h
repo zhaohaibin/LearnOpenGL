@@ -6,7 +6,7 @@
 
 namespace entity
 {
-	class cube : public node
+	class cube : public geometry_node
 	{
 	public:
 		cube(float width, const string& texture_image, glm::mat4 model_matrix = glm::mat4(1.0f));

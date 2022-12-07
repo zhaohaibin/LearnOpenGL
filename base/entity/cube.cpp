@@ -4,29 +4,28 @@
 namespace entity
 {
 	cube::cube(float width, const string& texture_image, glm::mat4 model_matrix/* = glm::mat4(1.0f)*/)
-		: node(model_matrix)
+		: geometry_node(model_matrix)
 		, m_width(width)
 		, m_texture_image(texture_image)
 		, m_init(true)
 		, m_shader(nullptr)
 	{
-		geometry_node* geo_node = new geometry_node;
-		geo_node->set_primitive(GL_TRIANGLES);
+		set_primitive(GL_TRIANGLES);
 		shader_file _file;
 		const string path = "D:/Workspace/opengl/WorkSpace/LearnOpenGL/base/";
 		_file.m_vertex_shader_file = path + "/shader/cube/shader.vs";
 		_file.m_frag_shader_file = path + "/shader/cube/shader.fs";
-		geo_node->create_shader(_file);
+		create_shader(_file);
 
-		geo_node->add_material("texture1", m_texture_image);
+		add_material("texture1", m_texture_image);
 		//¶¥µã»º³å¶ÔÏó
 		float* vertex_data;
 		int size = gen_vertex_data(&vertex_data);
-		geo_node->set_vertex(vertex_data, size, 0);
+		set_vertex(vertex_data, size, 0);
 
 		float* texture_coord_data;
 		size = gen_texture_coord_data(&texture_coord_data);
-		geo_node->set_vertex_texture(texture_coord_data, size, 1);
+		set_vertex_texture(texture_coord_data, size, 1);
 
 		unsigned int temp[] = {
 			0, 1, 2,
@@ -44,9 +43,8 @@ namespace entity
 		};
 		unsigned int* indices = new unsigned int[sizeof(temp) / sizeof(unsigned int)];
 		memcpy(indices, temp, sizeof(temp));
-		geo_node->set_elements(indices, sizeof(temp) / sizeof(unsigned int));
-		geo_node->set_draw_array(false);
-		add_child(geo_node);
+		set_elements(indices, sizeof(temp) / sizeof(unsigned int));
+		set_draw_array(false);
 	}
 
 	cube::~cube()

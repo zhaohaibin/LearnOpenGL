@@ -17,6 +17,7 @@ geometry_node::geometry_node(glm::mat4 model_matrix /*= glm::mat4(1.0f)*/) : nod
 , m_is_draw_arrays(true)
 , m_element_data(nullptr)
 , m_element_count(0)
+, m_primitive(GL_TRIANGLES)
 {
 }
 

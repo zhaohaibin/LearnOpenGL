@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{aee40df6-0e57-4e27-b45b-32410ff35ac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{7c09d3e4-628a-44b6-a25f-a43af55907d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\glad">
+      <UniqueIdentifier>{9d091ce7-db08-4b31-858f-867816f0aef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\glad\src">
+      <UniqueIdentifier>{3c3e213b-6fa4-4d9f-959e-cd9bf5059bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\entity">
+      <UniqueIdentifier>{60ecef5a-ba41-4462-b085-55b0499db4e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\camera.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\geometry_node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\node.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\node_state.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\shader.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\stb_image_impl.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\system_env.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\texture_loader.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\texture_style.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\viewer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\glad\src\glad.c">
+      <Filter>third_party\glad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="stencil_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\base\entity\cube.cpp">
+      <Filter>base\entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\base\camera.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\geometry_node.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\node_state.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\shader.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\system_env.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\texture_loader.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\texture_style.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\viewer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="stencil_test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\base\entity\cube.h">
+      <Filter>base\entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
