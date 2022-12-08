@@ -43,6 +43,9 @@ stencil_testing::stencil_testing()
 	model = glm::translate(model, glm::vec3(0.0, 0.0, 0.5));
 	m_rect->set_model_matrix(model);
 	add_child(m_rect);
+
+	m_node_update = new coordinate_node_before_rendering_update_callback;
+	this->set_before_rendering_update_callback(m_node_update);
 }
 
 void stencil_testing::do_render_childs()
@@ -172,4 +175,14 @@ geometry_node* cube::create_face(float* vertex, unsigned int vertex_length,
 	p->add_material("texture_1", texture_file);
 
 	return p;
+}
+
+void coordinate_node_before_rendering_update_callback::do_update(node* p)
+{
+	glm::mat4 model = p->get_model_matrix();
+
+	model = glm::translate(model, glm::vec3(0.0, 0.0, -1.0));
+	model = glm::rotate(model, glm::radians(-0.04f), glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(0.0, 0.0, 1.0));
+	p->set_model_matrix(model);
 }
