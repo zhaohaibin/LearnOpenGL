@@ -157,6 +157,7 @@
     <ClCompile Include="..\base\texture_style.cpp" />
     <ClCompile Include="..\base\viewer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="normal_texture_node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\base\camera.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="..\base\texture_loader.h" />
     <ClInclude Include="..\base\texture_style.h" />
     <ClInclude Include="..\base\viewer.h" />
+    <ClInclude Include="normal_texture_node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
