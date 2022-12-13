@@ -7,6 +7,21 @@
 
 class geometry_node : public node
 {
+	struct layout_data
+	{
+		inline layout_data(float* data, unsigned int length, unsigned int index, unsigned int step)
+			: m_data(data)
+			, m_length(length)
+			, m_index(index)
+			, m_step(step)
+		{
+		}
+		float* m_data;
+		unsigned int m_length;
+		unsigned int m_index;
+		unsigned int m_step;
+		bool m_is_update;
+	};
 public:
 	struct shader_uniform_value
 	{
@@ -38,6 +53,7 @@ public:
 	void set_vertex_normal(float* data, unsigned int length, unsigned int layout_index);
 	void set_vertex_texture(float* data, unsigned int length, unsigned int layout_index, unsigned int step = 2);
 
+	void set_layout_data(float* data, unsigned int length, unsigned int layout_index, unsigned int step = 2);
 	//设置element
 	// @data 指向索引数据
 	// @length 索引个数
@@ -54,6 +70,7 @@ public:
 
 	node_state* get_state_set();
 private:
+	bool setup_layout_data();
 	bool setup_vertex_array();
 	bool update_vertex_array();
 	bool setup_vertex_color_array();
@@ -98,6 +115,8 @@ private:
 	std::vector<material> m_materials;
 
 	node_state m_state_set;
+
+	std::vector<layout_data> m_layout_datas;
 };
 
 #endif //_GEOMETRY_NODE_H

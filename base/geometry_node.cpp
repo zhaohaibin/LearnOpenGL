@@ -38,6 +38,8 @@ bool geometry_node::initialize()
 	rt = setup_vertex_normal_array();
 	rt = setup_vertex_texture_array();
 	rt = setup_element();
+
+	setup_layout_data();
 	glBindVertexArray(0);
 
 	return true;
@@ -103,6 +105,11 @@ void geometry_node::set_vertex_texture(float* data, unsigned int length, unsigne
 	m_vertex_texture_coord_data_lenght = length;
 	m_vertex_texture_coord_layout_index = layout_index;
 	m_vertex_texture_coord_step = step;
+}
+
+void geometry_node::set_layout_data(float* data, unsigned int length, unsigned int layout_index, unsigned int step /*= 2*/)
+{
+	m_layout_datas.push_back(layout_data(data, length, layout_index, step));
 }
 
 void geometry_node::set_elements(unsigned int* data, unsigned int length)
@@ -182,6 +189,21 @@ void geometry_node::add_material(const material& _material)
 node_state* geometry_node::get_state_set()
 {
 	return &m_state_set;
+}
+
+bool geometry_node::setup_layout_data()
+{
+	for (int i = 0; i < m_layout_datas.size(); ++i)
+	{
+		unsigned int vbo;
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, m_layout_datas[i].m_length, m_layout_datas[i].m_data, GL_STATIC_DRAW);
+		glVertexAttribPointer(m_layout_datas[i].m_index, m_layout_datas[i].m_step, 
+			GL_FLOAT, GL_FALSE, m_layout_datas[i].m_step * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(m_layout_datas[i].m_index);
+	}
+	return true;
 }
 
 bool geometry_node::setup_vertex_array()
